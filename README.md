@@ -16,7 +16,7 @@ sudo apt-get install pimoroni
 
 And also some further Python requirements
 ```bash
-pip3 install parsec
+pip3 install parsy
 ```
 
 ## Instructions
