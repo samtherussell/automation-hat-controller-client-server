@@ -9,17 +9,17 @@ def ft(x):
   return bytes(s, encoding="ascii")
 
 line_parser = choice(
-    choice(result(string("analog"), hat.analog), result(string("input"), hat.input))
+    choice(string("analog").result(hat.analog), string("input").result(hat.input))
       .skip(space())
       .bind(lambda o: digit()
         .skip(space())
-        .bind(lambda i: result(string("read"), o[int(i)].read))),
-    choice(result(string("output"), hat.output), result(string("relay"), hat.relay))
+        .bind(lambda i: string("read").result(o[int(i)].read))),
+    choice(string("output").result(hat.output), string("relay").result(hat.relay))
       .skip(space())
       .bind(lambda o: digit().parsecmap(lambda i: o[int(i)]))
         .skip(space())
         .bind(lambda o: choice(
-            result(string("is_on"), lambda: int(o.is_on())),
+            string("is_on").result(lambda: int(o.is_on())),
           string("write")
             .skip(space())
             .compose(digit().parsecmap(lambda x: lambda: o.write(int(x))))
