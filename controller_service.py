@@ -11,9 +11,9 @@ socket_path = "/tmp/hat_controller_socket"
 
 s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 try:
-    os.remove(socket_path)
-except OSError:
-    pass
+  os.remove(socket_path)
+except FileNotFoundError:
+  pass
 s.bind(socket_path)
 os.chmod(socket_path, 0o777)
 s.listen(1)
