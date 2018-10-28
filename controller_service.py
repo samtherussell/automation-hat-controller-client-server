@@ -15,6 +15,7 @@ try:
 except OSError:
     pass
 s.bind(socket_path)
+os.chmod(socket_path, 0o777)
 s.listen(1)
 while True:
   conn, addr = s.accept()
