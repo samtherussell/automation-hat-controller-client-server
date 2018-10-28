@@ -30,3 +30,14 @@ Eg.
 ```bash
 perl demo_read.pl
 ```
+
+### For auto-startup
+
+The `hat_controller.service` file describes the auto-starting service. You may have to edit the `ExecStart` field to specify the executables location.
+Then, to install and enable, run...
+```bash
+sudo cp hat_controller.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable hat_controller
+sudo systemctl status hat_controller
+```

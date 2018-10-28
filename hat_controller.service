@@ -1,0 +1,10 @@
+[Unit]
+Description=Run the automation hat controller interface
+
+[Service]
+User=pi
+ExecStart= /home/pi/automation-hat-controller-client-server/controller_service.py
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
