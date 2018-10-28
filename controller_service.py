@@ -57,7 +57,8 @@ s.bind("/tmp/hat_controller_socket")
 s.listen(1)
 while True:
   conn, addr = s.accept()
-  conn.send = lambda x: conn.send(encode(x))
+  def send(x):
+    conn.send(encode(x))
   try:
     while True:
       line = conn.recv(20).decode(encoding="ascii")
@@ -71,11 +72,11 @@ while True:
         command = line_parser.parse(line)
         ret = command()
         if ret != None:
-          conn.send("OK " + str(ret))
+          send("OK " + str(ret))
         else:
-          conn.send("OK")
+          send("OK")
       except Exception as e:
-        conn.send("ERROR " + str(e))
+        send("ERROR " + str(e))
 
   finally:
     conn.close()
