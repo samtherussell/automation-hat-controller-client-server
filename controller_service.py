@@ -7,12 +7,14 @@ def encode(x):
   s = s if s[-1]=="\n" else s + "\n"
   return bytes(s, encoding="ascii")
 
+socket_path = "/tmp/hat_controller_socket"
+
 s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 try:
-    os.remove("/tmp/hat_controller_socket")
+    os.remove(socket_path)
 except OSError:
     pass
-s.bind("/tmp/hat_controller_socket")
+s.bind(socket_path)
 s.listen(1)
 while True:
   conn, addr = s.accept()
